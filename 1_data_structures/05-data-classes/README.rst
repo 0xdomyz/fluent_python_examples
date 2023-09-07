@@ -1,0 +1,6 @@
+- data class builders
+- type hints
+- @dataclass
+- special psuedotype hints
+- classes with no logic may be sign of misplaced logic
+- pattern matching with instances of any class

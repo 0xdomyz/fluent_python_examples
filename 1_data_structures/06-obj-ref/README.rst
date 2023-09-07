@@ -1,4 +1,15 @@
-Sample code for Chapter 8 - "Object references, mutability and recycling"
+- Every Python object has an identity, a type, and a value, and only the value of an
+     object may change over time.
+- Immutable objects with equal values and immutable collections with ref to mut.
+- Variables hold references:
 
-From the book "Fluent Python" by Luciano Ramalho (O'Reilly, 2015)
-http://shop.oreilly.com/product/0636920032519.do
+    - assignment
+    - augmented assignment
+    - rebinding
+    - function parameters
+    - function default values
+
+- garbage collection
+    - reference counting
+    - cyclic garbage collection
+- weak references

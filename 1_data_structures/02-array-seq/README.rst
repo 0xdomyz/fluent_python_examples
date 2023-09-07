@@ -1,4 +1,12 @@
-Sample code for Chapter 2 - "An array of sequences"
-
-From the book "Fluent Python 2e" by Luciano Ramalho (O'Reilly)
-http://shop.oreilly.com/product/0636920032519.do
+- flat or container
+- no immutable container sequence
+- List comprehensions and generator
+- Tuples as records with unnamed fields and as immutable lists. hash(t)
+- tuple unpacking, destructuring
+- Sequence slicing
+- multi-dimensional slicing, ellipsis
+- assigning to slices
+- repeated concatenation, augmented assignment
+- sort and the sorted, key
+- array.array.
+- collections.deque

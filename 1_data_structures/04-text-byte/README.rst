@@ -1,4 +1,7 @@
-Sample code for Chapter 4 - "Text and bytes"
-
-From the book "Fluent Python" by Luciano Ramalho (O'Reilly, 2015)
-http://shop.oreilly.com/product/0636920032519.do
+- need to keep text strings separated from binary sequences that represent encoded text.
+- binary sequence data types
+- encoding and decoding, encoding errors.
+- encoding detection
+- Unicode normalization, case folding
+- the Unicode database
+- dual-mode APIs.
