@@ -1,4 +1,9 @@
-Sample code for Chapter 8 - "Closures and decorators"
-
-From the book "Fluent Python, Second Edition" by Luciano Ramalho (O'Reilly, 2020)
-http://shop.oreilly.com/product/0636920273196.do
+- metaprogramming
+- Registration decorators
+- import time and runtime
+- variable scoping, closures, and nonlocal declaration
+- event-oriented programs for GUIs or asynchronous I/O with callbacks
+- Parameterized decorators 
+- stacked decorators
+- class-based implementation
+- @cache and @singledispatch

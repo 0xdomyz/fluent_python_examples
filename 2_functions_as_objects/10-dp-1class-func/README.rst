@@ -1,7 +1,15 @@
-Sample code for Chapter 10 - "Design patterns with first class functions"
-
-From the book "Fluent Python" by Luciano Ramalho (O'Reilly, 2015)
-http://shop.oreilly.com/product/0636920032519.do
+- 16 of 23 patterns have qualitatively simpler implementation
+    in Lisp or Dylan than in C++ for at least some uses of each patterns
+- due to dynamic features in particular, first-class functions
+- failings of the design patterns book is Too much
+    emphasis on patterns as end-points instead of steps in the design process
+- In many cases, functions or callable objects provide a more natural way of
+    implementing callbacks than the Strategy or the Command patterns
+- sometimes you may encounter a design pattern or an API that requires that components
+    implement an interface with a single method, and that method has a generic-sounding
+    name such as “execute,” “run,” or “do_it.” Such patterns or APIs often can be
+    implemented with less boilerplate code in Python using functions as first-class
+    objects.
 
 Notes
 =====
