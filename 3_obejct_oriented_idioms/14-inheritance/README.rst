@@ -1,4 +1,8 @@
-Sample code for Chapter 14 - "Inheritance: for better or for worse"
-
-From the book "Fluent Python, Second Edition" by Luciano Ramalho (O'Reilly, 2021)
-https://learning.oreilly.com/library/view/fluent-python-2nd/9781492056348/
+- super()
+- UserList, UserDict, UserString
+- collections.abc
+- __mro__
+- mixin classes
+- socketserver, django views, tkinter gui
+- the 7 recommendations
+- rejecting inheritance, use static duck typing, composition instead

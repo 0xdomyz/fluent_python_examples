@@ -1,4 +1,8 @@
-Sample code for Chapter 13 - "Operator overloading: doing it right"
-
-From the book "Fluent Python" by Luciano Ramalho (O'Reilly, 2015)
-http://shop.oreilly.com/product/0636920032519.do
+- overloading limited to existing operators
+- unary: __neg__, __pos__
+- infix: __add__, __radd__, NotImplemented
+- detecting operands: try/except, isinstance
+- isinstance against abc: goose typing
+- rich comparison: __eq__, __ne__, logic for choosing reverse method
+- augmented assignment: __iadd__
+- + is stricter than +=

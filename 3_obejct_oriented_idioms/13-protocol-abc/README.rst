@@ -1,4 +1,7 @@
-Sample code for Chapter 11 - "Interfaces, protocols and ABCs"
-
-From the book "Fluent Python" by Luciano Ramalho (O'Reilly, 2015)
-http://shop.oreilly.com/product/0636920032519.do
+- runtime and static, nominal and structural types
+- duck typing, goose typing, static duck typing, static typing
+- dynamic and static protocols
+- defensive programming
+- abc, __subclasshook__
+- static protocols, @runtime_checkable
+- numeric protocols

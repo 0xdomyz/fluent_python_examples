@@ -1,0 +1,7 @@
+- @overload
+- typing.TypedDict
+- typing.cast
+- typing.get_type_hints
+- generic type, formal type parameter, parameterized type, and actual type parameter
+- invariant, covariant, and contravariant generic types
+- define generic static protocol
