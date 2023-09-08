@@ -1,4 +1,8 @@
-Sample code for Chapter 14 - "Iterables, iterators and generators"
-
-From the book "Fluent Python" by Luciano Ramalho (O'Reilly, 2015)
-http://shop.oreilly.com/product/0636920032519.do
+- classic iterator implemented by hand has no practical use
+- iter()
+- __next__()
+- generator
+- itertools, general purpose generator functions
+- yield from 
+- classic coroutines, native coroutines, await
+- type hints for Iterable, Iterator, Generator
