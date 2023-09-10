@@ -68,3 +68,49 @@ Contention:
 
     Dispute over limite assets, such as lock, storage, CPU time.
 
+Process, Threads in Python
+--------------------------------
+
+interpreter and thread
+^^^^^^^^^^^^^^^^^^^^^^^
+
+#. Python interpreter is a process. To run more processes:
+
+        - multiprocessing
+        - concurrent.futures
+        - subprocess
+
+#. Python interpreter uses single thread. to start more:
+    
+        - threading
+        - concurrent.futures
+
+GIL
+^^^^^^^^
+
+#. One python thread can hold the GIL and execute python code at a time.
+    GIL control access to refrence count, and other interpreter states.
+
+#. Python's bytecode interpreter interrupts threads periodically.
+    OS scheduler can then pick other threads.
+
+#. Built-in, Python/C APIs can release GIL.
+
+#. Standard functions with syscalls releases the GIL: disk I/O, network I/O,
+    time.sleep(). CPU-intensives in the NumPy/SciPy, zlib and bz2.
+
+#. Python/C API level extensions can launch GIL-free threads.
+    They can read write to the memory underlying objects that support the buffer
+    protocol: bytearray, array.array, NumPy arrays.
+
+Impact of GIL to different tasks
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+#. The effect of the GIL on network programming with Python threads is
+    relatively small, because the I/O functions release the GIL.
+
+#. Contention over the GIL slows down compute-intensive Python threads.
+    Sequential, single-threaded code is simpler and faster for such tasks.
+
+#. To run CPU-intensive Python code on multiple cores, you must use
+    multiple Python processes.
