@@ -7,6 +7,8 @@
 import itertools
 import time
 from multiprocessing import synchronize  # <2>
+
+# Event is func that returns synchronize.Event
 from multiprocessing import Event, Process  # <1>
 
 
@@ -30,10 +32,11 @@ def slow() -> int:
 def supervisor() -> int:
     done = Event()
     spinner = Process(target=spin, args=("thinking!", done))  # <4>
-    print(f"spinner object: {spinner}")  # <5>
+    print(f"spinner object: {spinner}")  # <5> shows proc id
     spinner.start()
     result = slow()
     done.set()
+    # semophore: a signal that a process sends to another process
     spinner.join()
     return result
 

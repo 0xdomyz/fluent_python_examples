@@ -1,8 +1,12 @@
+"""
+Python code using asyncio has
+only one flow of execution, unless you’ve explicitly started additional threads
+or processes. That means only one coroutine executes at any point in time.
+Concurrency is achieved by control passing from one coroutine to another.
+"""
+
 # python3 spinner_async_experiment.py
 
-# credits: Example by Luciano Ramalho inspired by
-# Michele Simionato's multiprocessing example in the python-list:
-# https://mail.python.org/pipermail/python-list/2009-February/675659.html
 
 import asyncio
 import itertools
@@ -10,6 +14,7 @@ import time
 
 
 async def spin(msg: str) -> None:
+    print("THIS WILL NEVER BE OUTPUT")
     for char in itertools.cycle(r"\|/-"):
         status = f"\r{char} {msg}"
         print(status, flush=True, end="")
@@ -22,15 +27,15 @@ async def spin(msg: str) -> None:
 
 # tag::SPINNER_ASYNC_EXPERIMENT[]
 async def slow() -> int:
-    time.sleep(3)  # <4>
+    time.sleep(3)  # <4> blocks the thread
     return 42
 
 
 async def supervisor() -> int:
     spinner = asyncio.create_task(spin("thinking!"))  # <1>
-    print(f"spinner object: {spinner}")  # <2>
-    result = await slow()  # <3>
-    spinner.cancel()  # <5>
+    print(f"spinner object: {spinner}")  # <2> shows pending task
+    result = await slow()  # <3> transfer control to slow()
+    spinner.cancel()  # <5> control never reache body of spin()
     return result
 
 
