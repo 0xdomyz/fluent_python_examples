@@ -24,6 +24,8 @@ def spin(msg: str, done: Event) -> None:  # done is obj to sync threads
             # seconds is given to Event.wait(s), this call returns False when the
             # timeout elapses, or returns True as soon as Event.set() is called by
             # another thread.
+            #
+            # GIL is released when calling wait()
             break  # <5>
     blanks = " " * len(status)
     print(f"\r{blanks}\r", end="")  # <6> clear line
