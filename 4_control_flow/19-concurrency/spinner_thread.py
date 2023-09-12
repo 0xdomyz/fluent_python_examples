@@ -40,7 +40,7 @@ def slow() -> int:
 # tag::SPINNER_THREAD_REST[]
 def supervisor() -> int:  # <1>
     done = Event()  # <2> coordination object
-    spinner = Thread(target=spin, args=("thinking!", done))  # <3>
+    spinner = Thread(target=spin, args=("thinking!", done))  # <3> invoke callable
     print(f"spinner object: {spinner}")  # <4>
     # shows that the thread is not running yet
     spinner.start()  # <5>

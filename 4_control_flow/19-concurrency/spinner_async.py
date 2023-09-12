@@ -37,6 +37,7 @@ async def spin(msg: str) -> None:  # <1> no need event
             await asyncio.sleep(0.1)  # <2> pause without blocking other coro
         except asyncio.CancelledError:  # <3>
             break
+            # can handle cleanup here
     blanks = " " * len(status)
     print(f"\r{blanks}\r", end="")
 
@@ -56,10 +57,15 @@ def main() -> None:  # <1> func, not coroutine
 
 
 async def supervisor() -> int:  # <3> native coroutine
-    spinner: asyncio.Task = asyncio.create_task(spin("thinking!"))  # <4> schedule
+    spinner: asyncio.Task = asyncio.create_task(
+        spin("thinking!")
+    )  # <4> schedule coro to run
     print(f"spinner object: {spinner}")  # <5>
     result = await slow()  # <6> call coroutine, block
-    spinner.cancel()  # <7> raise CancelledError in coroutine
+    spinner.cancel()  # <7>
+    #  raises CancelledError
+    # at the await expression where the coroutine body is currently suspended.
+    # therfore it is safe to cancel
     return result
 
 
