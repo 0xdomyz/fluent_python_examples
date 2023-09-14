@@ -4,18 +4,8 @@
 - Emulating sequences
 - numeric types
 
-Doctests::
+__bool__:
 
-    python3 -m doctest frenchdeck.doctest -v
+bool() is used in boolean context.
+user defined obj is truthy, unless __bool__ or __len__ is implemented.
 
-    # And to check doctests embedded in a module:
-
-    python3 -m doctest vector2d.py -v
-
-Jupyter Notebook::
-
-    #Install ``pytest`` and the ``nbval`` plugin:
-
-    pip install pytest nbval
-
-    pytest --nbval
