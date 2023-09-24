@@ -1,0 +1,21 @@
+#!/usr/bin/env python3.11
+import time
+from clockdeco0 import clock
+
+
+@clock
+def snooze(seconds):
+    time.sleep(seconds)
+
+
+@clock
+def factorial(n):
+    return 1 if n < 2 else n * factorial(n - 1)
+
+
+if __name__ == "__main__":
+    print("*" * 40, "Calling snooze(.123)")
+    snooze(0.123)
+    print("*" * 40, "Calling factorial(6)")
+    print("6! =", factorial(6))
+    print("name of snooze:", snooze.__name__)
