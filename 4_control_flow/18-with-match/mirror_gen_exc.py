@@ -78,6 +78,7 @@ is handled by the context manager):
 import contextlib
 import sys
 
+
 @contextlib.contextmanager
 def looking_glass():
     original_write = sys.stdout.write
@@ -86,13 +87,33 @@ def looking_glass():
         original_write(text[::-1])
 
     sys.stdout.write = reverse_write
-    msg = ''  # <1>
+    msg = ""  # <1>
+
+    # Having a try/finally (or a with block) around the yield is an
+    # unavoidable price of using @contextmanager, because you never
+    # know what the users of your context manager are going to do inside
+    # the with block.4
+
     try:
-        yield 'JABBERWOCKY'
+        yield "JABBERWOCKY"
     except ZeroDivisionError:  # <2>
-        msg = 'Please DO NOT divide by zero!'
+        msg = "Please DO NOT divide by zero!"
     finally:
         sys.stdout.write = original_write  # <3>
         if msg:
             print(msg)  # <4>
+        print("END context")
+
+
 # end::MIRROR_GEN_EXC[]
+
+if __name__ == "__main__":
+    # compare with mirror_gen.py, this tears down the context manager even if
+    # an uncaught exception is raised
+    # python3.11 mirror_gen_exc.py
+    # python3.11 mirror_gen.py
+
+    with looking_glass():
+        print("Humpty Dumpty")
+        x = no_such_name  # <1>
+        print("END")  # <2>

@@ -66,6 +66,7 @@ The decorated generator also works as a decorator:
 import contextlib
 import sys
 
+
 @contextlib.contextmanager  # <1>
 def looking_glass():
     original_write = sys.stdout.write  # <2>
@@ -74,6 +75,19 @@ def looking_glass():
         original_write(text[::-1])
 
     sys.stdout.write = reverse_write  # <4>
-    yield 'JABBERWOCKY'  # <5>
+    yield "JABBERWOCKY"  # <5>
     sys.stdout.write = original_write  # <6>
+    print("END")
+
+
 # end::MIRROR_GEN_EX[]
+
+if __name__ == "__main__":
+
+    @looking_glass()
+    def verse():
+        print("The time has come")
+        a = b
+
+    verse()  # <1>
+    print("back to normal")  # <2>
