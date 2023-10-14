@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python3.11
 
 """Slow HTTP server class.
 
@@ -20,6 +20,7 @@ from random import random, uniform
 MIN_DELAY = 0.5  # minimum delay for do_GET (seconds)
 MAX_DELAY = 5.0  # maximum delay for do_GET (seconds)
 
+
 class SlowHTTPRequestHandler(SimpleHTTPRequestHandler):
     """SlowHTTPRequestHandler adds delays and errors to test HTTP clients.
 
@@ -40,58 +41,72 @@ class SlowHTTPRequestHandler(SimpleHTTPRequestHandler):
         """Serve a GET request."""
         delay = uniform(MIN_DELAY, MAX_DELAY)
         cc = self.path[-6:-4].upper()
-        print(f'{cc} delay: {delay:0.2}s')
+        print(f"{cc} delay: {delay:0.2}s")
         time.sleep(delay)
         if random() < self.error_rate:
             # HTTPStatus.IM_A_TEAPOT requires Python >= 3.9
             try:
                 self.send_error(HTTPStatus.IM_A_TEAPOT, "I'm a Teapot")
             except BrokenPipeError as exc:
-                print(f'{cc} *** BrokenPipeError: client closed')
+                print(f"{cc} *** BrokenPipeError: client closed")
         else:
             f = self.send_head()
             if f:
                 try:
                     self.copyfile(f, self.wfile)
                 except BrokenPipeError as exc:
-                    print(f'{cc} *** BrokenPipeError: client closed')
+                    print(f"{cc} *** BrokenPipeError: client closed")
                 finally:
                     f.close()
+
 
 # The code in the `if` block below, including comments, was copied
 # and adapted from the `http.server` module of Python 3.9
 # https://github.com/python/cpython/blob/master/Lib/http/server.py
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     import argparse
 
     parser = argparse.ArgumentParser()
-    parser.add_argument('--bind', '-b', metavar='ADDRESS',
-                        help='Specify alternate bind address '
-                             '[default: all interfaces]')
-    parser.add_argument('--directory', '-d', default=os.getcwd(),
-                        help='Specify alternative directory '
-                             '[default:current directory]')
-    parser.add_argument('--error-rate', '-e', metavar='PROBABILITY',
-                        default=0.0, type=float,
-                        help='Error rate; e.g. use .25 for 25%% probability '
-                             '[default:0.0]')
-    parser.add_argument('port', action='store',
-                        default=8001, type=int,
-                        nargs='?',
-                        help='Specify alternate port [default: 8001]')
+    parser.add_argument(
+        "--bind",
+        "-b",
+        metavar="ADDRESS",
+        help="Specify alternate bind address " "[default: all interfaces]",
+    )
+    parser.add_argument(
+        "--directory",
+        "-d",
+        default=os.getcwd(),
+        help="Specify alternative directory " "[default:current directory]",
+    )
+    parser.add_argument(
+        "--error-rate",
+        "-e",
+        metavar="PROBABILITY",
+        default=0.0,
+        type=float,
+        help="Error rate; e.g. use .25 for 25%% probability " "[default:0.0]",
+    )
+    parser.add_argument(
+        "port",
+        action="store",
+        default=8001,
+        type=int,
+        nargs="?",
+        help="Specify alternate port [default: 8001]",
+    )
     args = parser.parse_args()
-    handler_class = partial(SlowHTTPRequestHandler,
-                            directory=args.directory,
-                            error_rate=args.error_rate)
+    handler_class = partial(
+        SlowHTTPRequestHandler, directory=args.directory, error_rate=args.error_rate
+    )
 
     # ensure dual-stack is not disabled; ref #38907
     class DualStackServer(ThreadingHTTPServer):
         def server_bind(self):
             # suppress exception when protocol is IPv4
             with contextlib.suppress(Exception):
-                self.socket.setsockopt(
-                    socket.IPPROTO_IPV6, socket.IPV6_V6ONLY, 0)
+                self.socket.setsockopt(socket.IPPROTO_IPV6, socket.IPV6_V6ONLY, 0)
             return super().server_bind()
 
     # test is a top-level function in http.server omitted from __all__
