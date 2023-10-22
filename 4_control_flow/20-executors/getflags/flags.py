@@ -13,6 +13,23 @@ Sample runs (first with new domain, so no caching ever)::
     BD BR CD CN DE EG ET FR ID IN IR JP MX NG PH PK RU TR US VN
     20 downloads in 14.57s
 
+End point::
+
+    import requests
+    from pathlib import Path
+
+    BASE_URL = "https://www.fluentpython.com/data/flags"  # <3>
+    cc = "CN"
+    url = f"{BASE_URL}/{cc}/{cc}.gif".lower()
+
+    # download bytes
+    resp = requests.get(url)
+    resp.raise_for_status()
+    image = resp.content
+
+    # save
+    Path("test.gif").write_bytes(image)
+
 
 """
 
